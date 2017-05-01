@@ -3,5 +3,7 @@ before_build:
   - dotnet restore
 after_build:
 - cmd: msbuild ConsoleApp1 /t:pack /p:Configuration=%CONFIGURATION%;PackageVersion=%APPVEYOR_BUILD_VERSION%;IncludeSource=true
+artifacts:
+- path: '**\*.nupkg'
 #on_finish:
 #  - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
