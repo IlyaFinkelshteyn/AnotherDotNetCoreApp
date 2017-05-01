@@ -1,8 +1,7 @@
 image: Visual Studio 2017
 before_build:
   - dotnet restore
-build:
-  publish_nuget: true
-  verbosity: normal
-on_finish:
-  - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
+after_build:
+- cmd: msbuild ConsoleApp1 /t:pack /p:Configuration=%CONFIGURATION%;PackageVersion=%APPVEYOR_BUILD_VERSION%;IncludeSource=true
+#on_finish:
+#  - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
