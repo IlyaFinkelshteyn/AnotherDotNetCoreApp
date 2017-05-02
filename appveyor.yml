@@ -2,7 +2,7 @@ image: Visual Studio 2017
 before_build:
   - dotnet restore
 after_build:
-- cmd: msbuild ConsoleApp1 /t:pack /p:Configuration=%CONFIGURATION%;PackageVersion=%APPVEYOR_BUILD_VERSION%
+- cmd: msbuild ConsoleApp1 /t:pack /p:Configuration=%CONFIGURATION% /p:NuspecFile=ConsoleApp1\ConsoleApp1.nuspec;PackageVersion=%APPVEYOR_BUILD_VERSION%
 artifacts:
 - path: '**\*.nupkg'
 #on_finish:
