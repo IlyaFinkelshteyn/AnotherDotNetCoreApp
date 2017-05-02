@@ -2,8 +2,9 @@ image: Visual Studio 2017
 before_build:
   - dotnet restore
 after_build:
-- cmd: msbuild ConsoleApp1 /t:pack /p:Configuration=%CONFIGURATION% /p:NuspecFile=ConsoleApp1\ConsoleApp1.nuspec;PackageVersion=%APPVEYOR_BUILD_VERSION%
+#- cmd: msbuild ConsoleApp1 /t:pack /p:Configuration=%CONFIGURATION% /p:NuspecFile=ConsoleApp1\ConsoleApp1.nuspec;PackageVersion=%APPVEYOR_BUILD_VERSION%
+- cmd: msbuild ConsoleApp1 /t:pack /p:Configuration=%CONFIGURATION%;NuspecFile=ConsoleApp1\ConsoleApp1.nuspec;PackageVersion=%APPVEYOR_BUILD_VERSION%
 artifacts:
 - path: '**\*.nupkg'
-#on_finish:
-#  - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
+on_finish:
+  - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
